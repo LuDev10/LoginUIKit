@@ -14,6 +14,13 @@ class Login: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
+        
+        emailTextField.text = "navigationController"
+        passwordTextField.text = "123"
+        setup()
+    }
+    
+    private func setup() {
         configureImage()
         configureStack()
         configureLabel(label: emailLabel, text: "Correo Electronico")
@@ -22,16 +29,16 @@ class Login: UIViewController {
         configureTextField(textField: passwordTextField, placeholder: "Ingrese su contraseña", type: "password")
         configureButton()
         configureLayout()
-        
     }
-    func configureStack() {
+    
+    private func configureStack() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.axis = .vertical
         contentView.spacing = 20
         view.addSubview(contentView)
     }
     
-    func configureLabel(label: UILabel, text: String) {
+    private func configureLabel(label: UILabel, text: String) {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 20)
         label.text = text
@@ -40,7 +47,7 @@ class Login: UIViewController {
         contentView.addArrangedSubview(label)
     }
     
-    func configureTextField(textField: UITextField, placeholder: String, type: String) {
+    private func configureTextField(textField: UITextField, placeholder: String, type: String) {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = placeholder
         textField.backgroundColor = .lightGray
@@ -70,7 +77,7 @@ class Login: UIViewController {
             
         }
     }
-    func configureButton() {
+    private func configureButton() {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.backgroundColor = .systemYellow
         loginButton.setTitle("Iniciar Sesion", for: .normal)
@@ -84,21 +91,27 @@ class Login: UIViewController {
         }
         else if emailTextField.text == "present",  passwordTextField.text == "1234" {
             let presentView = Present()
-            presentView.sheetPresentationController?.detents = [.medium()]
-            presentView.isModalInPresentation = true
+            presentView.modalPresentationStyle = .fullScreen
+            presentView.modalTransitionStyle = .coverVertical
+            
+//            presentView.sheetPresentationController?.detents = [.medium()]
+//            presentView.isModalInPresentation = true
+//            presentView.sheetPresentationController?.selectedDetentIdentifier = .medium
+//            presentView.sheetPresentationController?.prefersGrabberVisible = true
+//            presentView.sheetPresentationController?.preferredCornerRadius = 50
+            
             present(presentView, animated: true)
-            presentView.sheetPresentationController?.selectedDetentIdentifier = .medium
         }
     }
     
-    func configureImage() {
+    private func configureImage() {
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         logoImage.image = UIImage(named: "Logo")
         logoImage.alpha = 0.4
         view.addSubview(logoImage)
     }
 
-    func configureLayout() {
+    private func configureLayout() {
         NSLayoutConstraint.activate([
             
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100),
